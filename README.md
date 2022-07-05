@@ -13,4 +13,35 @@
 # Задача SQL
 В базе данных MS SQL Server есть продукты и категории. Одному продукту может соответствовать много категорий, в одной категории может быть много продуктов. Напишите SQL запрос для выбора всех пар «Имя продукта – Имя категории». Если у продукта нет категорий, то его имя все равно должно выводиться.
 
+```
+CREATE TABLE Product(
+	Id INT IDENTITY PRIMARY KEY, 
+	[Name] NVARCHAR(255) NOT NULL
+)
+CREATE TABLE Category(
+	Id INT IDENTITY PRIMARY KEY, 
+	[Name] NVARCHAR(255) NOT NULL
+)
+
+CREATE TABLE ProductsWithCatategories(
+	ProductId INT NOT NULL FOREIGN KEY REFERENCES Product(Id), 
+	CategoryId INT NOT NULL FOREIGN KEY REFERENCES Category(Id),
+	PRIMARY KEY(ProductId, CategoryId)
+)
+
+INSERT INTO Product 
+	VALUES('Молоко'), ('Хлеб'), ('Курица'), ('Вода'), ('Макароны'), ('Масло')
+
+INSERT INTO Category 
+	VALUES('Выпечка'), ('Напитки'), ('Мясо')
+
+INSERT INTO ProductsWithCatategories 
+	VALUES(1, 2), (2, 1), (3, 3)
+
+SELECT Product.[Name] AS 'Наименование', Category.[Name] AS 'Категория товара' FROM Product 
+	LEFT JOIN ProductsWithCatategories ON ProductsWithCatategories.ProductId = Product.Id
+	LEFT JOIN Category ON Category.Id = ProductsWithCatategories.CategoryId
+
+```
+
 ![изображение](https://user-images.githubusercontent.com/36164890/177372246-654fbe56-186a-43fb-a251-879b66f10809.png)
