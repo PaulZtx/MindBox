@@ -8,3 +8,4 @@
     Вычисление площади фигуры без знания типа фигуры в compile-time
 
     Проверку на то, является ли треугольник прямоугольным
+## [Библиотека с фигурами](https://github.com/PaulZtx/MindBox/blob/main/MindLib%20%E2%80%94%20%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F/ClassShape.cs)
